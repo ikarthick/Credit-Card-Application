@@ -20,8 +20,8 @@ public class BankCardEntity {
     private Double limitAmount;
     @Column(name = "issuance_fee")
     private Double issuanceFee;
-    @Column(name = "reward_points_per_dolor")
-    private Double rewardPointsPerDolor;
+    @Column(name = "reward_points_per_cent_dolor")
+    private Double rewardPointsPerCentDolor;
     @OneToOne(mappedBy = "bankCard")
     private CardTransactionSummaryEntity cardTransactionSummaryEntity;
 
@@ -57,12 +57,12 @@ public class BankCardEntity {
         this.issuanceFee = issuanceFee;
     }
 
-    public Double getRewardPointsPerDolor() {
-        return rewardPointsPerDolor;
+    public Double getRewardPointsPerCentDolor() {
+        return rewardPointsPerCentDolor;
     }
 
-    public void setRewardPointsPerDolor(Double rewardPointsPerDolor) {
-        this.rewardPointsPerDolor = rewardPointsPerDolor;
+    public void setRewardPointsPerCentDolor(Double rewardPointsPerDolor) {
+        this.rewardPointsPerCentDolor = rewardPointsPerDolor;
     }
 
     public CardTransactionSummaryEntity getCardTransactionSummaryEntity() {

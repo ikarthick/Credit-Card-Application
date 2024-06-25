@@ -44,7 +44,7 @@ public class CardTransactionService {
             }
             cardTransactionSummaryEntity.setAmountBalance(cardTransactionSummaryEntity.getAmountBalance() - cardTransactionDto.getAmount());
             Double existingRewardPoints = cardTransactionSummaryEntity.getRewardPoints();
-            cardTransactionSummaryEntity.setRewardPoints(existingRewardPoints + bankCardEntity.getRewardPointsPerDolor() * cardTransactionDto.getAmount());
+            cardTransactionSummaryEntity.setRewardPoints(existingRewardPoints + calculateRewardPoints(cardTransactionDto.getAmount(), bankCardEntity.getRewardPointsPerCentDolor()));
             cardTransactionSummaryRepositoryI.save(cardTransactionSummaryEntity);
 
         } else {
@@ -55,7 +55,7 @@ public class CardTransactionService {
                 throw new BankBalanceInsufficientException("BankBalanceInsufficientException with balance amount- "+ bankCardEntity.getLimitAmount() + " and transaction amount- "+ cardTransactionDto.getAmount());
             }
             cardTransactionSummaryEntityObj.setAmountBalance(bankCardEntity.getLimitAmount() - cardTransactionDto.getAmount());
-            cardTransactionSummaryEntityObj.setRewardPoints(bankCardEntity.getRewardPointsPerDolor() * cardTransactionDto.getAmount());
+            cardTransactionSummaryEntityObj.setRewardPoints(calculateRewardPoints(cardTransactionDto.getAmount(), bankCardEntity.getRewardPointsPerCentDolor()));
             //persist card transaction
             cardTransactionSummaryRepositoryI.save(cardTransactionSummaryEntityObj);
         }
@@ -81,5 +81,12 @@ public class CardTransactionService {
             return false;
         }
         return existingBalance >= transactionAmount;
+    }
+
+    public static Double calculateRewardPoints(Double purchaseAmount, Double rewardPointsPerCentDollar) {
+        // Calculate the number of complete 100 dollar units
+        int completeCentDollarUnits = (int) (purchaseAmount / 100);
+        // Calculate the reward points
+        return completeCentDollarUnits * rewardPointsPerCentDollar;
     }
 }

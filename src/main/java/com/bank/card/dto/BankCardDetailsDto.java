@@ -8,7 +8,7 @@ public class BankCardDetailsDto {
     private String cardName;
     private Double limitAmount;
     private Double issuanceFee;
-    private Double rewardPointsPerDolor;
+    private Double rewardPointsPerCentDolor;
 
     public String getCardName() {
         return cardName;
@@ -34,11 +34,11 @@ public class BankCardDetailsDto {
         this.issuanceFee = issuanceFee;
     }
 
-    public Double getRewardPointsPerDolor() {
-        return rewardPointsPerDolor;
+    public Double getRewardPointsPerCentDolor() {
+        return rewardPointsPerCentDolor;
     }
 
-    public void setRewardPointsPerDolor(Double rewardPointsPerDolor) {
-        this.rewardPointsPerDolor = rewardPointsPerDolor;
+    public void setRewardPointsPerCentDolor(Double rewardPointsPerCentDolor) {
+        this.rewardPointsPerCentDolor = rewardPointsPerCentDolor;
     }
 }
